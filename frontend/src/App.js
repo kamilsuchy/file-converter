@@ -65,6 +65,7 @@ function App() {
     link.click();
     link.remove();
     window.URL.revokeObjectURL(downloadUrl);
+    setSelectedFile(null);
   } catch (error) {
     setErrorMessage("Error during conversion: " + error.message);
   }
