@@ -1,7 +1,7 @@
 services:
   - type: web
     name: convertify
-    env: java
+    runtime: java
     region: frankfurt
     plan: free
     buildCommand: |
