@@ -1,22 +1,15 @@
 services:
   - type: web
     name: file-converter
-    env: java
+    runtime: docker
     region: frankfurt
     plan: free
     buildCommand: |
       cd frontend
       npm install
       npm run build
-      rm -rf ../backend/src/main/resources/static
-      mkdir -p ../backend/src/main/resources/static
-      cp -r build/* ../backend/src/main/resources/static
       cd ../backend
-      chmod +x gradlew
       ./gradlew build
-    startCommand: java -jar build/libs/*.jar
-    envVars:
-      - key: SERVER_PORT
-        value: 8080
+    startCommand: ""
     autoDeploy: true
     rootDir: backend
