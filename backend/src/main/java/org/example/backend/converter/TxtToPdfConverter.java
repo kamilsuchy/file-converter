@@ -12,6 +12,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static org.example.backend.ExtensionConstansHolder.PDF;
+import static org.example.backend.ExtensionConstansHolder.TXT;
+
 @Service
 public class TxtToPdfConverter implements FileConverter {
 
@@ -45,5 +48,11 @@ public class TxtToPdfConverter implements FileConverter {
                 return baos.toByteArray();
             }
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(TXT) && targetFormat.equalsIgnoreCase(PDF);
     }
 }

@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.FormatDetector;
 import org.example.backend.converter.FileConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +22,15 @@ public class FileConversionController {
     private static final Logger logger = LoggerFactory.getLogger(FileConversionController.class);
 
     private final List<FileConverter> converters;
+    private final FormatDetector formatDetector;
 
 
     @Autowired
-    FileConversionController(List<FileConverter> converters) {
+    FileConversionController(List<FileConverter> converters,
+                             FormatDetector formatDetector) {
 
         this.converters = converters;
+        this.formatDetector = formatDetector;
     }
 
     @PostMapping(value = "/convert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -38,17 +42,36 @@ public class FileConversionController {
         logger.info("Converting file " + file.getOriginalFilename());
         logger.info("Format: " + format);
 
+        byte[] contentConverted = convertFile(file, format);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + findNewFileName(file, format))
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(contentConverted);
+    }
+
+    private String findNewFileName(MultipartFile file, String targetFormat) {
+
         String originalName = file.getOriginalFilename();
 
         String baseName = (originalName != null && originalName.contains("."))
                 ? originalName.substring(0, originalName.lastIndexOf("."))
                 : "converted";
 
-        String newFilename = baseName + "." + format.toLowerCase();
+        return baseName + "." + targetFormat.toLowerCase();
+    }
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + newFilename)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(file.getBytes());
+    private byte[] convertFile(MultipartFile file, String targetFormat) throws IOException {
+
+        return converter(formatDetector.findExtension(file), targetFormat)
+                .convert(file);
+    }
+
+    private FileConverter converter(String inputFormat, String targetFormat) {
+
+        return converters.stream()
+                .filter(converter -> converter.isApplicable(inputFormat, targetFormat))
+                .findFirst()
+                .orElseThrow();
     }
 }

@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+import static org.example.backend.ExtensionConstansHolder.PDF;
+import static org.example.backend.ExtensionConstansHolder.TXT;
+
 @Service
 public class PdfToTxtConverter implements FileConverter {
 
@@ -20,5 +23,11 @@ public class PdfToTxtConverter implements FileConverter {
             // Zwróć tekst jako bajty (UTF-8)
             return text.getBytes("UTF-8");
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(PDF) && targetFormat.equalsIgnoreCase(TXT);
     }
 }

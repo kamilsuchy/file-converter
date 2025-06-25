@@ -9,6 +9,9 @@ import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static org.example.backend.ExtensionConstansHolder.JPG;
+import static org.example.backend.ExtensionConstansHolder.PNG;
+
 @Service
 public class PngToJpgConverter implements FileConverter {
 
@@ -42,5 +45,11 @@ public class PngToJpgConverter implements FileConverter {
             }
             return baos.toByteArray();
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(PNG) && targetFormat.equalsIgnoreCase(JPG);
     }
 }

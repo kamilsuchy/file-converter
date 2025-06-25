@@ -15,6 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static org.example.backend.ExtensionConstansHolder.WEBP;
+
 @Service
 public class WebpToPdfConverter implements FileConverter {
 
@@ -41,5 +43,11 @@ public class WebpToPdfConverter implements FileConverter {
             doc.save(out);
             return out.toByteArray();
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(WEBP) && targetFormat.equals("pdf");
     }
 }

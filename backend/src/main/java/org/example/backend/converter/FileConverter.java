@@ -7,4 +7,6 @@ import java.io.IOException;
 public interface FileConverter {
 
     byte[] convert(MultipartFile file) throws IOException;
+
+    boolean isApplicable(String inputFormat, String targetFormat);
 }

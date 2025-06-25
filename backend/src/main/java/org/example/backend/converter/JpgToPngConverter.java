@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static org.example.backend.ExtensionConstansHolder.JPG;
+import static org.example.backend.ExtensionConstansHolder.PNG;
+
 @Service
 public class JpgToPngConverter implements FileConverter {
 
@@ -29,5 +32,11 @@ public class JpgToPngConverter implements FileConverter {
             }
             return baos.toByteArray();
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(JPG) && targetFormat.equalsIgnoreCase(PNG);
     }
 }

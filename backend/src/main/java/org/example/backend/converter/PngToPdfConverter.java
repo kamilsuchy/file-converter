@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static org.example.backend.ExtensionConstansHolder.PDF;
+import static org.example.backend.ExtensionConstansHolder.PNG;
+
 @Service
 public class PngToPdfConverter implements FileConverter {
 
@@ -32,5 +35,11 @@ public class PngToPdfConverter implements FileConverter {
             doc.save(out);
             return out.toByteArray();
         }
+    }
+
+    @Override
+    public boolean isApplicable(String inputFormat, String targetFormat) {
+
+        return inputFormat.equalsIgnoreCase(PNG) && targetFormat.equalsIgnoreCase(PDF);
     }
 }
