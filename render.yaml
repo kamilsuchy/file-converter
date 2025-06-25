@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: convertify
-    runtime: java
+    name: file-converter
+    env: java
     region: frankfurt
     plan: free
     buildCommand: |
@@ -10,7 +10,7 @@ services:
       npm run build
       rm -rf ../backend/src/main/resources/static
       mkdir -p ../backend/src/main/resources/static
-      cp -r build ../backend/src/main/resources/static
+      cp -r build/* ../backend/src/main/resources/static
       cd ../backend
       chmod +x gradlew
       ./gradlew build
