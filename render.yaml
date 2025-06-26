@@ -1,10 +1,8 @@
-services:Add commentMore actions
+services:
   - type: web
-    name: convertify
-    runtime: docker
-    region: frankfurt
+    name: file-converter
+    env: docker
     plan: free
-    buildCommand: ""
-    startCommand: ""
+    region: frankfurt
     autoDeploy: true
-    rootDir: backend
+    branch: main
