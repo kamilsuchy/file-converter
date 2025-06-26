@@ -5,4 +5,4 @@ services:
     plan: free
     region: frankfurt
     autoDeploy: true
-    branch: main
+    branch: master
