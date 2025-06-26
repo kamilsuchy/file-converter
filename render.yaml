@@ -2,7 +2,7 @@ services:
   - type: web
     name: file-converter
     env: docker
-    plan: free
     region: frankfurt
+    plan: free
+    rootDir: .
     autoDeploy: true
-    branch: master
