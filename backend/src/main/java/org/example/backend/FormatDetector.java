@@ -13,6 +13,15 @@ public class FormatDetector {
 
         Tika tika = new Tika();
 
-        return tika.detect(file.getInputStream());
+        return removeTypeIfNeeded(tika.detect(file.getInputStream()));
+    }
+
+    private String removeTypeIfNeeded(String fileName) {
+
+        if (fileName.contains("/")) {
+            return fileName.substring(fileName.lastIndexOf('/') + 1);
+        }
+
+        return fileName;
     }
 }

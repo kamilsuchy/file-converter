@@ -4,9 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
 import static org.example.backend.ExtensionConstansHolder.PNG;
 import static org.example.backend.ExtensionConstansHolder.WEBP;
@@ -16,19 +19,26 @@ public class PngToWebpConverter implements FileConverter {
 
     @Override
     public byte[] convert(MultipartFile file) throws IOException {
-        // Wczytaj PNG jako BufferedImage
         BufferedImage image = ImageIO.read(file.getInputStream());
 
         if (image == null) {
-            throw new IOException("Invalid PNG image");
+            throw new IOException("Invalid image input");
         }
 
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            // Zapisz obraz jako WebP
-            boolean success = ImageIO.write(image, "webp", baos);
-            if (!success) {
-                throw new IOException("Failed to write image as WebP");
-            }
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("webp");
+        if (!writers.hasNext()) {
+            throw new IOException("No WebP writer found (is TwelveMonkeys on classpath?)");
+        }
+
+        ImageWriter writer = writers.next();
+
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             ImageOutputStream ios = ImageIO.createImageOutputStream(baos)) {
+
+            writer.setOutput(ios);
+            writer.write(image);
+            writer.dispose();
+
             return baos.toByteArray();
         }
     }

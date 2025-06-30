@@ -8,8 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static org.example.backend.ExtensionConstansHolder.JPG;
-import static org.example.backend.ExtensionConstansHolder.WEBP;
+import static org.example.backend.ExtensionConstansHolder.*;
 
 @Service
 public class WebpToJpgConverter implements FileConverter {
@@ -36,6 +35,6 @@ public class WebpToJpgConverter implements FileConverter {
     @Override
     public boolean isApplicable(String inputFormat, String targetFormat) {
 
-        return inputFormat.equalsIgnoreCase(WEBP) && targetFormat.equalsIgnoreCase(JPG);
+        return inputFormat.equalsIgnoreCase(WEBP) && (targetFormat.equalsIgnoreCase(JPG) || targetFormat.equalsIgnoreCase(JPEG));
     }
 }

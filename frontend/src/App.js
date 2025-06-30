@@ -32,6 +32,15 @@ function App() {
 
   const handleConvert = async () => {
   setErrorMessage("");
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'convert_click',
+    event_category: 'button',
+    event_label: 'Convert button',
+  });
+
+
   if (!selectedFile || !selectedFormat) return;
   
   const formData = new FormData();

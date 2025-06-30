@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.3'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'org.example'
@@ -15,6 +16,7 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url "https://repo.osgeo.org/repository/release/" }
 }
 
 dependencies {
@@ -24,6 +26,8 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.apache.tika:tika-core:2.9.0'
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
+    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.10.1'
+    implementation 'com.twelvemonkeys.imageio:imageio-core:3.10.1'
 }
 
 tasks.named('test') {
