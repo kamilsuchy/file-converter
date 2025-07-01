@@ -80,7 +80,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>File Converter</h1>
+      <h1 style={styles.heading}>Convertigo - Convert & Go</h1>
 
       <div style={styles.main}>
         {/* Left: Dropzone */}

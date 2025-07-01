@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Convertigo - Convert & Go"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -31,7 +31,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Convertigo</title>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -52,8 +52,9 @@
     -->
     <!-- Stopka -->
     <footer style="position: fixed; bottom: 0; width: 100%; background: #222; color: white; text-align: center; padding: 10px; font-size: 14px; z-index: 1000;">
-      © 2025 TwojaFirma. 
-      <a href="#" id="privacy-link" style="color: #4da6ff; cursor: pointer; text-decoration: underline;">Polityka prywatności</a>
+      © 2025 
+      <a href="#" id="terms-link" style="color: #4da6ff; cursor: pointer; text-decoration: underline;">Terms of Service</a>
+      <a href="#" id="privacy-link" style="color: #4da6ff; cursor: pointer; text-decoration: underline;">Privacy Policy</a>
     </footer>
 
     <!-- Modal z polityką prywatności -->
@@ -114,6 +115,67 @@
       modal.addEventListener('click', e => {
         if (e.target === modal) {
           modal.style.display = 'none';
+        }
+      });
+    </script>
+        <!-- Modal z  reguilaminem -->
+    <div id="terms-modal" style="
+        display: none;
+        position: fixed; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background: rgba(0,0,0,0.6); 
+        z-index: 2000;
+        overflow-y: auto;
+    ">
+      <div style="
+          background: white; 
+          max-width: 600px; 
+          margin: 60px auto; 
+          padding: 20px; 
+          border-radius: 8px; 
+          position: relative;
+          font-size: 14px;
+          color: #333;
+      ">
+        <button id="terms-close" style="
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: none; 
+            border: none; 
+            font-size: 18px; 
+            cursor: pointer;
+        ">✖</button>
+
+        <h2>Terms of Service</h2>
+        <p>
+          Terms of service
+        </p>
+        <p>
+          Przykład: Twoje dane są przetwarzane zgodnie z obowiązującymi przepisami o ochronie danych osobowych...
+        </p>
+        <!-- Dodaj więcej paragrafów w razie potrzeby -->
+      </div>
+    </div>
+
+    <script>
+      const termsModal = document.getElementById('terms-modal');
+      const termsOpenBtn = document.getElementById('terms-link');
+      const termsCloseBtn = document.getElementById('terms-close');
+    
+      termsOpenBtn.addEventListener('click', e => {
+        e.preventDefault();
+        termsModal.style.display = 'block';
+      });
+    
+      termsCloseBtn.addEventListener('click', () => {
+        termsModal.style.display = 'none';
+      });
+    
+      // Zamknięcie modala po kliknięciu poza treść
+      termsModal.addEventListener('click', e => {
+        if (e.target === termsModal) {
+          termsModal.style.display = 'none';
         }
       });
     </script>
