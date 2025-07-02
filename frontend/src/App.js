@@ -7,6 +7,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formats = ["WEBP", "PNG", "JPG", "PDF", "TXT"];
 
@@ -32,8 +33,13 @@ function App() {
 
   const handleConvert = async () => {
   setErrorMessage("");
+  setIsLoading(true);
 
-  if (!selectedFile || !selectedFormat) return;
+  if (!selectedFile || !selectedFormat) {
+    
+    setIsLoading(false);
+    return;
+  } 
   
   const formData = new FormData();
   formData.append("file", selectedFile);
@@ -69,6 +75,8 @@ function App() {
     setSelectedFile(null);
   } catch (error) {
     setErrorMessage("Error during conversion: " + error.message);
+  } finally {
+    setIsLoading(false);
   }
 };
 
@@ -153,6 +161,12 @@ function App() {
           Convert
         </button>
       </div>
+      {isLoading && (
+        <div style={styles.loaderOverlay}>
+          <div style={styles.loader}></div>
+          <p style={{ marginTop: "1rem" }}>Converting...</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -244,6 +258,29 @@ const styles = {
     cursor: "pointer",
     transition: "0.2s",
   },
+  loaderOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
+  },
+
+  loader: {
+    border: "8px solid #f3f3f3",
+    borderTop: "8px solid #333",
+    borderRadius: "50%",
+    width: "60px",
+    height: "60px",
+    animation: "spin 1s linear infinite",
+  },
+
 };
 
 export default App;
