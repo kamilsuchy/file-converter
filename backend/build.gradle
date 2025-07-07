@@ -26,7 +26,6 @@ dependencies {
     implementation 'org.apache.tika:tika-core:2.9.0'
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
     implementation 'org.sejda.imageio:webp-imageio:0.1.6'
-    implementation 'com.drawnoakes:metadata-extractor:2.19.0'
 }
 
 tasks.named('test') {
