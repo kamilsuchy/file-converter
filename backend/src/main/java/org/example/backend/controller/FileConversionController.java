@@ -61,10 +61,16 @@ public class FileConversionController {
         return baseName + "." + targetFormat.toLowerCase();
     }
 
-    private byte[] convertFile(MultipartFile file, String targetFormat) throws IOException {
+    private byte[] convertFile(MultipartFile file, String targetFormat) {
 
-        return converter(formatDetector.findExtension(file), targetFormat)
-                .convert(file);
+        try {
+            return converter(formatDetector.findExtension(file), targetFormat)
+                    .convert(file);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+
+            throw new RuntimeException(e);
+        }
     }
 
     private FileConverter converter(String inputFormat, String targetFormat) {

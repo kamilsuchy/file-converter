@@ -26,8 +26,8 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.apache.tika:tika-core:2.9.0'
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
-    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.10.1'
-    implementation 'com.twelvemonkeys.imageio:imageio-core:3.10.1'
+    implementation 'org.sejda.imageio:webp-imageio:0.1.6'
+    implementation 'com.drawnoakes:metadata-extractor:2.19.0'
 }
 
 tasks.named('test') {

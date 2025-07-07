@@ -16,18 +16,16 @@ public class JpgToWebpConverter implements FileConverter {
     @Override
     public byte[] convert(MultipartFile file) throws IOException {
 
-        // Wczytaj JPG jako BufferedImage
         BufferedImage image = ImageIO.read(file.getInputStream());
 
         if (image == null) {
-            throw new IOException("Invalid image file");
+            throw new IOException("Invalid image file (not an image or unsupported format)");
         }
 
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            // Zapisz jako WebP
             boolean success = ImageIO.write(image, "webp", baos);
             if (!success) {
-                throw new IOException("Failed to write image in WebP format");
+                throw new IOException("WebP writer not found or failed to encode image");
             }
             return baos.toByteArray();
         }
