@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P4SJHMQF');</script>
+    <!-- Google Tag Manager (ładowany po akceptacji marketingowych cookies) -->
+    <script>
+      document.addEventListener('cookieyes_consent_update', function () {
+        if (CookieYes.consent.analytics === true) {
+          (function(w,d,s,l,i){
+            w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});
+            var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-P4SJHMQF');
+        }
+      });
+    </script>
     <!-- End Google Tag Manager -->
     <!-- Start cookieyes banner -->
     <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/aa727480a79218cc1d6231c1/script.js"></script>
@@ -17,7 +27,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Convert your files easily with Convertigo. Convert WEBP, PNG, JPG, PDF, TXT and more online. No sign-up. Free, fast, and secure."
+      content="Convert your files easily with FileTornado. Convert WEBP, PNG, JPG, PDF, TXT and more online. No sign-up. Free, fast, and secure."
     />
     <meta name="keywords" content="file converter, convert png to jpg, pdf to jpg, jpg to webp, png to webp, online converter, convert files online" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
@@ -35,7 +45,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Convertigo - Free Online File Converter (WEBP, PNG, JPG, PDF, TXT)</title>
+    <title>FileTornado - Free Online File Converter (WEBP, PNG, JPG, PDF, TXT)</title>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
